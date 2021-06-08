@@ -55,6 +55,14 @@ function to merge the new inputs with the text in file
 
 def merge():
    return( parse_template(path)[0].format( *inputs(data=parse_template(path)[1]) ) ) 
-   
-print (merge())
-   
+
+
+"""
+copy data from merge 
+"""
+def copyFile(text ):
+    file = open('../assets/result.txt','w')
+    file.write(text)
+    print(text)
+    
+copyFile(merge())
