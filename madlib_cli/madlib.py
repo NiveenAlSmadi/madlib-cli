@@ -13,7 +13,9 @@ welcomeContent = """
  """
 
 print(welcomeContent)
-path='../assets/tamplate.txt'
+
+path='assets/tamplate.txt'
+
 """
  functon to read text  with input: path and return : the  text in file 
 
@@ -24,7 +26,7 @@ def read_template(path):
        data =file.read()
    return (data)
 
-read_template('../assets/tamplate.txt')
+
 
 
 # inputs function to resives data 
@@ -41,10 +43,10 @@ function find all word in {} and formated with new input by user
 
 """
 
-def parse_template(path):
+def parse_template(text):
 
-    data=re.findall(r"\{(.*?)\}",read_template(path)) 
-    text=re.sub( r"\{(.*?)\}", '{}', read_template(path))
+    data=re.findall(r"\{(.*?)\}",text) 
+    text=re.sub( r"\{(.*?)\}", '{}', text)
     return [text, tuple(data)]
 
 
@@ -53,16 +55,19 @@ def parse_template(path):
 function to merge the new inputs with the text in file
 """
 
-def merge():
-   return( parse_template(path)[0].format( *inputs(data=parse_template(path)[1]) ) ) 
+def merge(pars1,pars2):
+   return( pars1.format( *pars2 ) ) 
 
 
 """
 copy data from merge 
 """
 def copyFile(text ):
-    file = open('../assets/result.txt','w')
+    file = open('assets/result.txt','w')
     file.write(text)
     print(text)
-    
-copyFile(merge())
+
+if __name__ == "__main__":
+    pars1 = parse_template(read_template(path))[0]
+    pars2 = inputs(parse_template(read_template(path))[1])
+    copyFile(merge(pars1,pars2))
